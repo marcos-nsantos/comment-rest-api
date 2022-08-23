@@ -12,3 +12,7 @@ tasks:
   run:
     cmds:
       - docker-compose up --build -d
+
+  stop:
+    cmds:
+      - docker-compose down
