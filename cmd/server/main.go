@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/marcos-nsantos/comments-rest-api/internal/database"
@@ -16,10 +15,10 @@ func Run() error {
 		fmt.Println("Failed to connect to the database")
 		return err
 	}
-	if err = db.Ping(context.Background()); err != nil {
+	if err := db.MigrateDB(); err != nil {
+		fmt.Println("failed to migrate database")
 		return err
 	}
-	fmt.Println("successfully connected and pinged the database")
 
 	fmt.Println("starting up our application")
 	return nil
