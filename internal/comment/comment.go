@@ -48,9 +48,9 @@ func (s *Service) GetComment(ctx context.Context, id string) (Comment, error) {
 	cmt, err := s.Store.GetComment(ctx, id)
 	if err != nil {
 		fmt.Println(err)
-		return cmt, ErrFetchingComment
+		return Comment{}, ErrFetchingComment
 	}
-	return Comment{}, nil
+	return cmt, nil
 }
 
 func (s *Service) UpdateComment(ctx context.Context, ID string, updatedCmt Comment) (Comment, error) {

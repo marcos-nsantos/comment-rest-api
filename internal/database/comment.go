@@ -18,9 +18,10 @@ type CommentRow struct {
 
 func convertCommentRowToComment(row CommentRow) comment.Comment {
 	return comment.Comment{
-		ID:   row.ID,
-		Slug: row.Slug.String,
-		Body: row.Body.String,
+		ID:     row.ID,
+		Slug:   row.Slug.String,
+		Body:   row.Body.String,
+		Author: row.Body.String,
 	}
 }
 
