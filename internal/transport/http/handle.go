@@ -40,10 +40,10 @@ func (h Handler) mapRoutes() {
 		fmt.Fprintf(w, "Hello World")
 	})
 
-	h.Router.HandleFunc("/api/v1/comment", h.PostComment).Methods(http.MethodPost)
+	h.Router.HandleFunc("/api/v1/comment", JWTAuth(h.PostComment)).Methods(http.MethodPost)
 	h.Router.HandleFunc("/api/v1/comment/{id}", h.GetComment).Methods(http.MethodGet)
-	h.Router.HandleFunc("/api/v1/comment/{id}", h.UpdateComment).Methods(http.MethodPut)
-	h.Router.HandleFunc("/api/v1/comment/{id}", h.DeleteComment).Methods(http.MethodDelete)
+	h.Router.HandleFunc("/api/v1/comment/{id}", JWTAuth(h.UpdateComment)).Methods(http.MethodPut)
+	h.Router.HandleFunc("/api/v1/comment/{id}", JWTAuth(h.DeleteComment)).Methods(http.MethodDelete)
 }
 
 func (h Handler) Serve() error {
