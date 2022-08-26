@@ -16,12 +16,12 @@ type CommentRow struct {
 	Author sql.NullString
 }
 
-func convertCommentRowToComment(row CommentRow) comment.Comment {
+func convertCommentRowToComment(c CommentRow) comment.Comment {
 	return comment.Comment{
-		ID:     row.ID,
-		Slug:   row.Slug.String,
-		Body:   row.Body.String,
-		Author: row.Body.String,
+		ID:     c.ID,
+		Slug:   c.Slug.String,
+		Author: c.Author.String,
+		Body:   c.Body.String,
 	}
 }
 
@@ -40,7 +40,7 @@ func (d *Database) PostComment(ctx context.Context, cmt comment.Comment) (commen
 	cmt.ID = uuid.NewV4().String()
 	postRow := CommentRow{
 		ID:     cmt.ID,
-		Slug:   sql.NullString{String: cmt.Author, Valid: true},
+		Slug:   sql.NullString{String: cmt.Slug, Valid: true},
 		Author: sql.NullString{String: cmt.Author, Valid: true},
 		Body:   sql.NullString{String: cmt.Body, Valid: true},
 	}
