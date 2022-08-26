@@ -19,8 +19,9 @@ tasks:
 
   integration-test:
     cmds:
-      - docker-compose up --d db
+      - docker-compose up -d db
       - go test -tags=integration -v ./...
+      - docker-compose down
     env:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
@@ -28,3 +29,9 @@ tasks:
       DB_HOST: localhost
       DB_PORT: 5432
       SSL_MODE: disable
+
+  acceptance-test:
+    cmds:
+      - docker-compose up -d --build
+      - go test -tags=e2e -v ./...
+      - docker-compose down
